@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   class Foundation
     def initialize(attrs)
       attrs.each do |key, value|

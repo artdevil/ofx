@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   class Balance < Foundation
     attr_accessor :amount
     attr_accessor :amount_in_pennies

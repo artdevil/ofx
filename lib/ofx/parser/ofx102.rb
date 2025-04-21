@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module OFX
+module Ofx
   module Parser
     class OFX102
       VERSION = '1.0.2'
@@ -71,7 +71,7 @@ module OFX
       def build_statement(node)
         stmrs_node = node.search('stmtrs, ccstmtrs')
         account = build_account(node)
-        OFX::Statement.new(
+        Ofx::Statement.new(
           currency: stmrs_node.search('curdef').inner_text,
           start_date: build_date(stmrs_node.search('banktranlist > dtstart').inner_text),
           end_date: build_date(stmrs_node.search('banktranlist > dtend').inner_text),
@@ -83,7 +83,7 @@ module OFX
       end
 
       def build_account(node)
-        OFX::Account.new({
+        Ofx::Account.new({
                            bank_id: node.search('bankacctfrom > bankid').inner_text,
                            id: node.search('bankacctfrom > acctid, ccacctfrom > acctid').inner_text,
                            type: ACCOUNT_TYPES[node.search('bankacctfrom > accttype').inner_text.to_s.upcase],
@@ -95,7 +95,7 @@ module OFX
       end
 
       def build_status(node)
-        OFX::Status.new({
+        Ofx::Status.new({
                           code: node.search('code').inner_text.to_i,
                           severity: SEVERITY[node.search('severity').inner_text],
                           message: node.search('message').inner_text
@@ -103,7 +103,7 @@ module OFX
       end
 
       def build_sign_on
-        OFX::SignOn.new({
+        Ofx::SignOn.new({
                           language: html.search('signonmsgsrsv1 > sonrs > language').inner_text,
                           fi_id: html.search('signonmsgsrsv1 > sonrs > fi > fid').inner_text,
                           fi_name: html.search('signonmsgsrsv1 > sonrs > fi > org').inner_text,
@@ -124,7 +124,7 @@ module OFX
           nil
         end
 
-        OFX::Transaction.new({
+        Ofx::Transaction.new({
                                amount: build_amount(element),
                                amount_in_pennies: (build_amount(element) * 100).to_i,
                                fit_id: element.search('fitid').inner_text,
@@ -177,7 +177,7 @@ module OFX
           nil
         end
 
-        OFX::Balance.new({
+        Ofx::Balance.new({
                            amount: amount,
                            amount_in_pennies: (amount * 100).to_i,
                            posted_at: posted_at
@@ -188,7 +188,7 @@ module OFX
         if node.search('availbal').size > 0
           amount = to_decimal(node.search('availbal > balamt').inner_text)
 
-          OFX::Balance.new({
+          Ofx::Balance.new({
                              amount: amount,
                              amount_in_pennies: (amount * 100).to_i,
                              posted_at: build_date(node.search('availbal > dtasof').inner_text)

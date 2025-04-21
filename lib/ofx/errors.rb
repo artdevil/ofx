@@ -1,3 +1,3 @@
-module OFX
+module Ofx
   class UnsupportedFileError < StandardError; end
 end

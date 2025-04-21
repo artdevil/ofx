@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe OFX::Statement do
+describe Ofx::Statement do
   let(:parser) { ofx.parser }
   let(:statement) { parser.statements.first }
 
   context "Bank Account" do
-    let(:ofx) { OFX::Parser::Base.new("spec/fixtures/sample.ofx") }
+    let(:ofx) { Ofx::Parser::Base.new("spec/fixtures/sample.ofx") }
 
     it "returns currency" do
       statement.currency.should == "BRL"
@@ -20,7 +20,7 @@ describe OFX::Statement do
     end
 
     it "returns account" do
-      statement.account.should be_a(OFX::Account)
+      statement.account.should be_a(Ofx::Account)
       statement.account.id.should == '03227113109'
       statement.account.type.should == :checking
     end
@@ -62,7 +62,7 @@ describe OFX::Statement do
       end
 
       context "when AVAILBAL not found" do
-        let(:ofx) { OFX::Parser::Base.new("spec/fixtures/utf8.ofx") }
+        let(:ofx) { Ofx::Parser::Base.new("spec/fixtures/utf8.ofx") }
 
         it "returns nil " do
           available_balance.should be_nil
@@ -72,7 +72,7 @@ describe OFX::Statement do
   end
 
   context "Credit Card" do
-    let(:ofx) { OFX::Parser::Base.new("spec/fixtures/creditcard.ofx") }
+    let(:ofx) { Ofx::Parser::Base.new("spec/fixtures/creditcard.ofx") }
 
     it "returns currency" do
       statement.currency.should == "USD"
@@ -87,7 +87,7 @@ describe OFX::Statement do
     end
 
     it "returns account" do
-      statement.account.should be_a(OFX::Account)
+      statement.account.should be_a(Ofx::Account)
       statement.account.id.should == 'XXXXXXXXXXXX1111'
     end
 

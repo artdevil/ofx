@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   module Parser
     class OFX211 < OFX102
       VERSION = "2.1.1"

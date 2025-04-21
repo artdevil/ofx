@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe OFX::Parser::OFX102 do
+describe Ofx::Parser::OFX102 do
   before do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/sample.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/sample.ofx")
     @parser = @ofx.parser
   end
 
   it "should have a version" do
-    OFX::Parser::OFX102::VERSION.should == "1.0.2"
+    Ofx::Parser::OFX102::VERSION.should == "1.0.2"
   end
 
   it "should set headers" do
@@ -15,7 +15,7 @@ describe OFX::Parser::OFX102 do
   end
 
   it "should trim trailing whitespace from headers" do
-    headers = OFX::Parser::OFX102.parse_headers("VERSION:102   ")
+    headers = Ofx::Parser::OFX102.parse_headers("VERSION:102   ")
     headers["VERSION"].should == "102"
   end
 
@@ -24,16 +24,16 @@ describe OFX::Parser::OFX102 do
   end
 
   it "should set account" do
-    @parser.account.should be_a_kind_of(OFX::Account)
+    @parser.account.should be_a_kind_of(Ofx::Account)
   end
 
   it "should set account" do
-    @parser.sign_on.should be_a_kind_of(OFX::SignOn)
+    @parser.sign_on.should be_a_kind_of(Ofx::SignOn)
   end
 
   it "should set statements" do
     @parser.statements.size.should == 1
-    @parser.statements.first.should be_a_kind_of(OFX::Statement)
+    @parser.statements.first.should be_a_kind_of(Ofx::Statement)
   end
   
   it "should know about all transaction types" do
@@ -41,10 +41,10 @@ describe OFX::Parser::OFX102 do
       'CREDIT', 'DEBIT', 'INT', 'DIV', 'FEE', 'SRVCHG', 'DEP', 'ATM', 'POS', 'XFER',
       'CHECK', 'PAYMENT', 'CASH', 'DIRECTDEP', 'DIRECTDEBIT', 'REPEATPMT', 'OTHER'
     ]
-    valid_types.sort.should == OFX::Parser::OFX102::TRANSACTION_TYPES.keys.sort
+    valid_types.sort.should == Ofx::Parser::OFX102::TRANSACTION_TYPES.keys.sort
 
     valid_types.each do |transaction_type|
-      transaction_type.downcase.to_sym.should equal OFX::Parser::OFX102::TRANSACTION_TYPES[transaction_type]
+      transaction_type.downcase.to_sym.should equal Ofx::Parser::OFX102::TRANSACTION_TYPES[transaction_type]
     end
   end
 

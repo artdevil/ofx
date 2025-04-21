@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   class Account < Foundation
     attr_accessor :balance
     attr_accessor :bank_id

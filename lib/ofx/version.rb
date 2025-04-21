@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   module Version
     MAJOR = 0
     MINOR = 3

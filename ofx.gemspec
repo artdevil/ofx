@@ -3,7 +3,7 @@ require 'ofx/version'
 
 Gem::Specification.new do |s|
   s.name        = 'ofx'
-  s.version     = OFX::Version::STRING
+  s.version     = Ofx::Version::STRING
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Nando Vieira', 'Anna Cruz']
   s.email       = ['fnando.vieira@gmail.com', 'anna.cruz@gmail.com']
@@ -28,4 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'byebug', '~> 11.1.3'
   s.add_development_dependency 'rake', '~> 13.0.6'
   s.add_development_dependency 'rspec', '~> 3.10'
+  s.add_development_dependency 'bigdecimal', '~> 3.1.9'
+  s.add_development_dependency 'nkf', '~> 0.2.0'
 end

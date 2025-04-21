@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe OFX::SignOn do
+describe Ofx::SignOn do
   before do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/creditcard.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/creditcard.ofx")
     @parser = @ofx.parser
     @sign_on = @parser.sign_on
   end
@@ -21,7 +21,7 @@ describe OFX::SignOn do
     end
 
     it "should return status" do
-      @sign_on.status.should be_a(OFX::Status)
+      @sign_on.status.should be_a(Ofx::Status)
     end
   end
 end

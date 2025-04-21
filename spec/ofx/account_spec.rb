@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe OFX::Account do
+describe Ofx::Account do
   before do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/sample.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/sample.ofx")
     @parser = @ofx.parser
     @account = @parser.account
   end
@@ -55,7 +55,7 @@ describe OFX::Account do
       end
 
       it "should return nil if AVAILBAL not found" do
-        @ofx = OFX::Parser::Base.new("spec/fixtures/utf8.ofx")
+        @ofx = Ofx::Parser::Base.new("spec/fixtures/utf8.ofx")
         @parser = @ofx.parser
         @account = @parser.account
         @account.available_balance.should be_nil
@@ -64,7 +64,7 @@ describe OFX::Account do
 
     context "Credit Card" do
       before do
-        @ofx = OFX::Parser::Base.new("spec/fixtures/creditcard.ofx")
+        @ofx = Ofx::Parser::Base.new("spec/fixtures/creditcard.ofx")
         @parser = @ofx.parser
         @account = @parser.account
       end
@@ -79,7 +79,7 @@ describe OFX::Account do
     end
     context "With Issue" do # Bradesco do not provide a valid date in balance
       before do
-        @ofx = OFX::Parser::Base.new("spec/fixtures/dtsof_balance_issue.ofx")
+        @ofx = Ofx::Parser::Base.new("spec/fixtures/dtsof_balance_issue.ofx")
         @parser = @ofx.parser
         @account = @parser.account
       end
@@ -91,7 +91,7 @@ describe OFX::Account do
 
     context "Invalid Dates" do
       before do
-        @ofx = OFX::Parser::Base.new("spec/fixtures/bradesco.ofx")
+        @ofx = Ofx::Parser::Base.new("spec/fixtures/bradesco.ofx")
         @parser = @ofx.parser
       end
       it "should not raise error when balance has date zero" do
@@ -104,7 +104,7 @@ describe OFX::Account do
 
     context "decimal values using a comma" do
       before do
-        @ofx = OFX::Parser::Base.new("spec/fixtures/santander.ofx")
+        @ofx = Ofx::Parser::Base.new("spec/fixtures/santander.ofx")
         @parser = @ofx.parser
         @account = @parser.account
       end

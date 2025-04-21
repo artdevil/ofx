@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   # Error Reporting Aggregate
   class Status < Foundation
     attr_accessor :code     # Error code

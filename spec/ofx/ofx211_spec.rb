@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe OFX::Parser::OFX211 do
+describe Ofx::Parser::OFX211 do
   before do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/v211.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/v211.ofx")
     @parser = @ofx.parser
   end
 
   it "should have a version" do
-    OFX::Parser::OFX211::VERSION.should == "2.1.1"
+    Ofx::Parser::OFX211::VERSION.should == "2.1.1"
   end
 
   it "should set headers" do
@@ -19,11 +19,11 @@ describe OFX::Parser::OFX211 do
   end
 
   it "should set account" do
-    @parser.account.should be_a_kind_of(OFX::Account)
+    @parser.account.should be_a_kind_of(Ofx::Account)
   end
 
   it "should set account" do
-    @parser.sign_on.should be_a_kind_of(OFX::SignOn)
+    @parser.sign_on.should be_a_kind_of(Ofx::SignOn)
   end
 
   it "should set accounts" do
@@ -32,7 +32,7 @@ describe OFX::Parser::OFX211 do
 
   it "should set statements" do
     @parser.statements.size.should == 2
-    @parser.statements.first.should be_a_kind_of(OFX::Statement)
+    @parser.statements.first.should be_a_kind_of(Ofx::Statement)
   end
 
   context "transactions" do

@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   class Statement < Foundation
     attr_accessor :account
     attr_accessor :available_balance

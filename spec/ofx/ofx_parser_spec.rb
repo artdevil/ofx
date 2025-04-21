@@ -1,24 +1,24 @@
 require "spec_helper"
 
-describe OFX::Parser do
+describe Ofx::Parser do
   before do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/sample.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/sample.ofx")
   end
 
   it "should accept file path" do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/sample.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/sample.ofx")
     @ofx.content.should_not be_nil
   end
 
   it "should accept file handler" do
     file = open("spec/fixtures/sample.ofx")
-    @ofx = OFX::Parser::Base.new(file)
+    @ofx = Ofx::Parser::Base.new(file)
     @ofx.content.should_not be_nil
   end
 
   it "should accept file content" do
     file = open("spec/fixtures/sample.ofx").read
-    @ofx = OFX::Parser::Base.new(file)
+    @ofx = Ofx::Parser::Base.new(file)
     @ofx.content.should_not be_nil
   end
 
@@ -27,7 +27,7 @@ describe OFX::Parser do
   end
 
   it "should work with UTF8 and Latin1 encodings" do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/utf8.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/utf8.ofx")
     @ofx.content.should == open("spec/fixtures/utf8.ofx").read
   end
 
@@ -37,25 +37,25 @@ describe OFX::Parser do
 
   it "should raise exception when trying to parse an unsupported OFX version" do
     lambda {
-      OFX::Parser::Base.new("spec/fixtures/invalid_version.ofx")
-    }.should raise_error(OFX::UnsupportedFileError)
+      Ofx::Parser::Base.new("spec/fixtures/invalid_version.ofx")
+    }.should raise_error(Ofx::UnsupportedFileError)
   end
 
   it "should raise exception when trying to parse an invalid file" do
     lambda {
-      OFX::Parser::Base.new("spec/fixtures/avatar.gif")
-    }.should raise_error(OFX::UnsupportedFileError)
+      Ofx::Parser::Base.new("spec/fixtures/avatar.gif")
+    }.should raise_error(Ofx::UnsupportedFileError)
   end
 
   it "should use 211 parser to parse version 200 ofx files" do
-    OFX::Parser::OFX211.stub(:new).and_return('ofx-211-parser')
-    ofx = OFX::Parser::Base.new(ofx_2_example('200'))
+    Ofx::Parser::OFX211.stub(:new).and_return('ofx-211-parser')
+    ofx = Ofx::Parser::Base.new(ofx_2_example('200'))
     ofx.parser.should == 'ofx-211-parser'
   end
 
   it "should use 211 parser to parse version 202 ofx files" do
-    OFX::Parser::OFX211.stub(:new).and_return('ofx-211-parser')
-    ofx = OFX::Parser::Base.new(ofx_2_example('202'))
+    Ofx::Parser::OFX211.stub(:new).and_return('ofx-211-parser')
+    ofx = Ofx::Parser::Base.new(ofx_2_example('202'))
     ofx.parser.should == 'ofx-211-parser'
   end
 
@@ -105,7 +105,7 @@ describe OFX::Parser do
       body   = open("spec/fixtures/sample.ofx").read.split(/<OFX>/, 2)[1]
       ofx_with_carriage_return = header + "<OFX>" + body
 
-      @ofx = OFX::Parser::Base.new(ofx_with_carriage_return)
+      @ofx = Ofx::Parser::Base.new(ofx_with_carriage_return)
       @ofx.headers.size.should be(9)
     end
   end

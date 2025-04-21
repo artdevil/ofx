@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe OFX::Status do
-  let(:ofx) { OFX::Parser::Base.new(ofx_file) }
+describe Ofx::Status do
+  let(:ofx) { Ofx::Parser::Base.new(ofx_file) }
   let(:parser) { ofx.parser }
   let(:status) { parser.sign_on.status }
 

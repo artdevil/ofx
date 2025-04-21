@@ -1,4 +1,4 @@
-module OFX
+module Ofx
   class SignOn < Foundation
     attr_accessor :language
     attr_accessor :fi_id

@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe OFX::Transaction do
+describe Ofx::Transaction do
   before do
-    @ofx = OFX::Parser::Base.new("spec/fixtures/sample.ofx")
+    @ofx = Ofx::Parser::Base.new("spec/fixtures/sample.ofx")
     @parser = @ofx.parser
     @account = @parser.account
   end
@@ -137,7 +137,7 @@ describe OFX::Transaction do
 
   context "with other types" do
     before do
-      @ofx = OFX::Parser::Base.new("spec/fixtures/bb.ofx")
+      @ofx = Ofx::Parser::Base.new("spec/fixtures/bb.ofx")
       @parser = @ofx.parser
       @account = @parser.account
     end
@@ -165,7 +165,7 @@ describe OFX::Transaction do
 
   context "decimal values using a comma" do
     before do
-      @ofx = OFX::Parser::Base.new("spec/fixtures/santander.ofx")
+      @ofx = Ofx::Parser::Base.new("spec/fixtures/santander.ofx")
       @parser = @ofx.parser
       @account = @parser.account
     end
@@ -201,7 +201,7 @@ describe OFX::Transaction do
 
   context "invalid decimal values" do
     before do
-      @ofx = OFX::Parser::Base.new("spec/fixtures/cef_malformed_decimal.ofx")
+      @ofx = Ofx::Parser::Base.new("spec/fixtures/cef_malformed_decimal.ofx")
       @parser = @ofx.parser
     end
 
